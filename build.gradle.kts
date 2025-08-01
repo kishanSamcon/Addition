@@ -1,6 +1,7 @@
 plugins {
-    id("com.android.library") version "7.0.4" // ✅ Add version
+    id("com.android.library") version "7.0.4"
     id("org.jetbrains.kotlin.android") version "1.5.31"
+    id("maven-publish") // ✅ Add this for JitPack
 }
 
 repositories {
@@ -15,23 +16,53 @@ android {
     defaultConfig {
         minSdk = 21
         targetSdk = 33
-      versionCode.set(1)
-      versionName.set("1.0")
+        
+        // Fix: Use simple assignment, not .set() method
+        versionCode = 1
+        versionName = "1.0"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    // Add your dependencies here if needed
+    implementation("androidx.core:core-ktx:1.8.0")
+    implementation("androidx.appcompat:appcompat:1.5.0")
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+}
+
+// Publishing configuration for JitPack
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "com.github.kishanSamcon"
+            artifactId = "addition-library"
+            version = "1.0.4"
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
     }
 }
