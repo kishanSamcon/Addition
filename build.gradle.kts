@@ -1,7 +1,7 @@
 plugins {
     id("com.android.library") version "7.0.4"
     id("org.jetbrains.kotlin.android") version "1.5.31"
-    id("maven-publish") // Add this line
+    id("maven-publish")
 }
 
 repositories {
@@ -17,9 +17,9 @@ android {
         minSdk = 21
         targetSdk = 33
         
-        // These properties should be here, inside defaultConfig block
+        // versionCode and versionName MUST be inside this defaultConfig block
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.7"
         
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -43,7 +43,6 @@ android {
 }
 
 dependencies {
-    // Add your dependencies here
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.appcompat:appcompat:1.5.0")
     testImplementation("junit:junit:4.13.2")
@@ -51,7 +50,6 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 }
 
-// This is required for JitPack to work
 publishing {
     publications {
         register<MavenPublication>("release") {
