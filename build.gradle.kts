@@ -1,6 +1,6 @@
 plugins {
     id("com.android.library") version "7.0.4"
-    id("org.jetbrains.kotlin.android") version "1.5.31"
+    id("org.jetbrains.kotlin.android") version "1.7.10"
     id("maven-publish")
 }
 
@@ -54,7 +54,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "com.github.kishanSamcon"
             artifactId = "addition-library"
-            version = "1.0.9"
+            version = "1.0.10"
 
             afterEvaluate {
                 from(components["release"])
