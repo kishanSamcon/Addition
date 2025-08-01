@@ -19,7 +19,7 @@ android {
         
         // versionCode and versionName MUST be inside this defaultConfig block
         versionCode = 1
-        versionName = "1.0.7"
+        versionName = "1.0.8"
         
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -55,7 +55,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "com.github.kishanSamcon"
             artifactId = "addition-library"
-            version = "1.0.7"
+            version = "1.0.8"
 
             afterEvaluate {
                 from(components["release"])
