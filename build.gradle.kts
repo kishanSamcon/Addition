@@ -1,50 +1,49 @@
 plugins {
     id("com.android.library") version "7.0.4"
     id("org.jetbrains.kotlin.android") version "1.5.31"
-    id("maven-publish") // ✅ Add this for JitPack
+    id("maven-publish") // Add this line
 }
 
 repositories {
-    google() // ✅ REQUIRED for Android plugins
+    google()
     mavenCentral()
 }
 
 android {
     compileSdk = 33
     namespace = "com.example.addition"
-
+    
     defaultConfig {
         minSdk = 21
         targetSdk = 33
         
-        // Fix: Use simple assignment, not .set() method
+        // These properties should be here, inside defaultConfig block
         versionCode = 1
         versionName = "1.0"
-
+        
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
-
+    
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+    
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    
     kotlinOptions {
         jvmTarget = "1.8"
     }
 }
 
 dependencies {
-    // Add your dependencies here if needed
+    // Add your dependencies here
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.appcompat:appcompat:1.5.0")
     testImplementation("junit:junit:4.13.2")
@@ -52,13 +51,13 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 }
 
-// Publishing configuration for JitPack
+// This is required for JitPack to work
 publishing {
     publications {
         register<MavenPublication>("release") {
             groupId = "com.github.kishanSamcon"
             artifactId = "addition-library"
-            version = "1.0.4"
+            version = "1.0.7"
 
             afterEvaluate {
                 from(components["release"])
