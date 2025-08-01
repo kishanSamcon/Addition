@@ -18,8 +18,7 @@ android {
         targetSdk = 33
         
         // versionCode and versionName MUST be inside this defaultConfig block
-        versionCode = 1
-        versionName = "1.0.8"
+    
         
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
